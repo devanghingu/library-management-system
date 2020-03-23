@@ -36,5 +36,5 @@ Transation
     
     returned_date
     retuend     [true | False()]
-    
+    [new table and info will added later]
  ```
