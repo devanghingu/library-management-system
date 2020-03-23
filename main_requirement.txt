@@ -1,0 +1,45 @@
+Project: small Library management system.
+
+1. Here book category model will hold types of books.
+2. Another model will hold information about books.
+3. Now whenever a registered user tries to issue a book, if the book is not available or already issued to some other user; his entry will be created into some waiting model.
+4. The waiting model will tell which user to allocate the book first when it is returned into the library.
+5. Users can view the status of the book request done by him/her. But only the book which he/she has requested not all.
+6. Also whenever a book is issued an email should be sent to the user with all the details of issued book.
+
+Also take a basic UI theme and integrate it with or some simple basic HTML CSS will also work.
+
+
+
+Model-Category
+_______________________
+Profile
+    Address
+    mobile number
+    totol book issued 
+_______________________    
+Book Category
+    id
+    category name
+
+_______________________
+Book Information
+    id
+    title
+    auther      (name may be future it will be connected with [auther model])
+    quantity    number of quantity of specific book
+    book category -> to book category
+    available   required [how manfy book available]
+    issued      default 0
+    
+_______________________
+Transation
+    id
+    book_id     [ref to book table]
+    issue_by    [to user table]
+    waiting     [True if books not available/ default false]
+    issue date
+    due date
+    
+    returned_date
+    retuend     [true | False()]
