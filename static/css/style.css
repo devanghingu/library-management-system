@@ -1,0 +1,54 @@
+#canvas-area{
+    text-align: center;
+    margin: auto;
+    background: transparent;
+}
+#defaultCanvas0
+{
+    background: transparent;
+}
+#recorder{
+    margin: auto; 
+}
+
+
+/** meetingprimarytext css **/
+.showbtn {
+    display: none;
+    position: fixed;
+    padding: 5px;
+    border-radius:5px;
+    background: white;
+    border: 1px solid #474747;
+    box-shadow: 2px 1px 21px 1px;
+
+    animation: 3s ease 5s 9 normal none running cubic-bezier;
+  }
+.note-li{
+    margin-top: 10px !important;
+    border-radius: 10px  !important;
+
+}
+
+#edit-meeting-btn-div
+{
+    width: 95%;
+    top: 9px;
+    position: absolute;
+    text-align: right;
+}
+#meeting-textarea   {
+    resize: none;
+    overflow: hidden;
+    
+}
+#meetingtext
+{
+    font-weight: 200;
+    background: #f7f8f9;
+    padding: 17px;
+    border: 1px solid #d8c8c8;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0px;
+}
+/** end meeting text css **/

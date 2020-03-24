@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% load static %}
+<h1>Hello world !</h1>
+
+{% if user.is_authenticated %}
+<h1>{{ user }}</h1>
+<a href="{% url 'useractivity:logout' %}">Logout</a>
+{% endif %}
+<a href="{% url 'useractivity:login' %}">Login User</a>
+<a href="{% url 'useractivity:registration' %}">Registation User</a>
+
+
+{% block body %}
+
+
+<section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            <div>Record your meeting<small></small></div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-md-12 col-xs-6">
+                {% include 'partial/messages.html' %}
+                <!-- loader start -->
+                <div class="text-center" id="loader-audio" hidden>
+                    <h4 id="record-message">Please do note close browser or tabs. We are working on it </h4>
+                    <div class="card-body loader-demo d-flex align-items-center justify-content-center">
+                        <div class="line-scale-pulse-out">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- loader end -->
+                <div class="recorder">
+                    <div id="canvas-area" class="col-md-10 col-sm-10 col-xs-10"></div>
+                    <div class="text-center"><button class="btn btn-primary" id='record-meeting'>Start
+                            Meeting</button>&nbsp;
+                        <button class="btn btn-danger" id='stop' hidden>End Meeting</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- Page footer-->
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'js/p5.js' %}"></script>
+    <script src="{% static 'js/p5.sound.js' %}"></script>
+    <script src="{% static 'js/sketch.js' %}"></script>
+{% endblock script %}
