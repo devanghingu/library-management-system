@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +8,7 @@
    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico'%}">
    <title>
-      {% block title %}
-         MOM - Record your meeting
-      {% endblock title %}
+      {% block title %}Library Management System{% endblock title %}
    </title><!-- =============== VENDOR STYLES ===============-->
    <!-- FONT AWESOME-->
    <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/brands.css' %}">
@@ -32,21 +29,13 @@
    <!-- =============== APP STYLES ===============-->
    <link rel="stylesheet" href="{% static 'css/app.css' %}" id="maincss' %}">
    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-   
-   {% block style %}
-      
-   {% endblock style %}
-      
+   {% block style %}{% endblock style %} 
 </head>
 
 <body>
    <!-- sidebar-->
    {% include 'partial/sidebar.html' %}
-
-
-   {% block body %}
-
-   {% endblock body %}
+   {% block body %}{% endblock body %}
 
    <footer class="footer-container"><span>&copy; 2020 - M-0-M</span></footer>
    </div>
@@ -64,11 +53,7 @@
    <script src="{%static 'vendor/select2/dist/js/select2.full.js'%}"></script>
    <script src="{% static 'js/app.js' %}"></script>
    {% block script %}{% endblock script %}
-   
- 
    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <!-- =============== APP SCRIPTS ===============-->
-
 </body>
-
 </html>

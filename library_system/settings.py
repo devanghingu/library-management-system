@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'useractivity',
-    'book',
+    'useractivity.apps.UseractivityConfig',
+    'book.apps.BookConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,5 +142,13 @@ STATICFILES_DIRS=[
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL="/"  
+LOGIN_REDIRECT_URL="books"  
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+
+MESSAGE_TAGS = {
+    messages.INFO: "alert-info",
+    messages.WARNING: "alert-warning",
+    messages.SUCCESS: "alert-success",
+    messages.ERROR: "alert-danger",
+}   

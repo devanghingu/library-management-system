@@ -13,12 +13,11 @@
          </div>
       </div>
       <div class="row">
-
          <div class="col-lg-4">
             <div class="card card-default">
                <div class="card-body text-center">
                   <div class="py-4"><img class="img-fluid rounded-circle img-thumbnail thumb96"
-                        src="{{ user.profile.profile.url }}" alt="Profile Pic" id="profile_pic"></div>
+                         alt="Profile Pic" id="profile_pic"></div>
                   <div class=" doltext-center">
                      <form action="" method="POST" id="image_upload_form" name="image_upload_form">
                         {% csrf_token %}
@@ -42,12 +41,7 @@
                   <h3 class="m-0 text-bold">{{ user.first_name|title }} {{user.last_name|title }}</h3>
                   <div class="my-3">
                      <p>
-                        {% if user.profile.bio %}
-                        {{ user.profile.bio }}
-                        {% else %}
-                        Bio Not Found
-                        {% endif %}
-                     </p>
+                      </p>
                   </div>
                </div>
             </div>
@@ -63,7 +57,7 @@
                   <!-- <a class="list-group-item list-group-item-action" href="#tabSetting5" data-toggle="tab">Applications</a> -->
                </div>
             </div>
-         </div>
+   `      </div>
          <div class="col-lg-8">
             <div class="tab-content p-0 b0">
                <div class="tab-pane active" id="profiletab">
@@ -72,7 +66,7 @@
                      <div class="card-body">
 
 
-                        <form action="{% url 'useractivity:profile'%}" method="POST">
+                        <form action="{% url 'profile'%}" method="POST">
                            {% csrf_token %}
                            {% for field in form %}
                            <div class="form-group">{{field.label}}
@@ -105,7 +99,7 @@
                   <div class="card b">
                      <div class="card-header bg-gray-lighter text-bold">Change Password</div>
                      <div class="card-body">
-                        <form action="{% url 'useractivity:change_password' %}" method="POST">
+                        <form action="{% url 'change_password' %}" method="POST">
                            {% csrf_token %}
                            {% for field in passwordform %}
                            <div class="form-group">{{field.label}}
@@ -116,8 +110,6 @@
                               </div>
                            {% endif %}
                            </div>
-
-                          
                            {% endfor %}
                            <button class="btn btn-info" type="submit">Update
                               password</button>

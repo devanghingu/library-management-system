@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper">
+       <div class="content-heading">
+          <div>books</div>
+       </div>
+       {% include 'partial/messages.html' %}
+       <div class="row">
+        <div class="col-xl-12">
+           <!-- START card-->
+           <div class="card card-default">
+              <div class="card-header">list of books </div>
+              <div class="card-body">
+                 <!-- START table-responsive-->
+                 <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                       <thead>
+                          <tr>
+                             <th>NO</th>
+                             <th>book Name</th>
+                             <th>Author</th>
+                             <th>Category</th>
+                             <th>Quantity</th>
+                             <th>Action</th>
+
+                          </tr>
+                       </thead>
+                       <tbody>
+                           {% for book in books %}
+                           <tr>
+                               <td>{{book.id}}</td>
+                               <td>{{book.title}}</td>
+                               <td>{{book.author}}</td>
+                               <td>{{book.category.name}}</td>
+                               <td>{{book.quantity}}</td>
+                               <td><a class="btn btn-primary" href="{% url 'issuebook' book_id=book.id %}">Issue</button></td>
+                            </tr>
+                            {% endfor %}
+                       </tbody>
+                    </table>
+                 </div><!-- END table-responsive-->
+              </div>
+           </div><!-- END card-->
+        </div>
+     </div>
+
+    </div>
+</section>
+
+
+
+
+
+{% endblock body %}
+    

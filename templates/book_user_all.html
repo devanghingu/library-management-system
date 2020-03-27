@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper">
+       <div class="content-heading">
+          <div>books</div>
+       </div>
+       {% include 'partial/messages.html' %}
+       <div class="row">
+        <div class="col-xl-12">
+           <!-- START card-->
+           <div class="card card-default">
+              <div class="card-header">list of books </div>
+              <div class="card-body">
+                 <!-- START table-responsive-->
+                 <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                       <thead>
+                          <tr>
+                              <th>NO</th>
+                              <th>book Name</th>
+                              <th>Author</th>
+                              <th>Status</th>
+                              <th>Issue Date</th>
+                             <th>Action</th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                           {% for data in mybook %}
+                           <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{data.book}}</td>
+                              <td>{{data.book.author}}</td>
+                              <td>{%if data.issue_date %}
+                                    {% if data.return_date %}
+                                       <div class="float-right badge badge-Success">returned</div>
+                                    {% else %}   
+                                       <div class="float-right badge badge-info">Issue</div>
+                                    {% endif %}
+                                    {% else %}
+                                    <div class="float-right badge badge-warning">waiting for issue</div>
+                                    {% endif %}
+                                 </td>
+                               <td>
+                                 <p>{%if data.issue_date %}{{data.issue_date }}{% else %}Not collected by you{% endif %}</p>
+                               </td>
+                               
+                               <td>
+                                 {% if data.return_date == none and data.issue_date == none %}<a class="btn btn-warning" href="">Cancel</button>{% endif %}
+                                 {% if data.return_date == none and data.issue_date  %}<a class="btn btn-success" href="">return</button>{% endif %}
+                                 </td>
+                            </tr>
+                            {% endfor %}
+                       </tbody>
+                    </table>
+                 </div><!-- END table-responsive-->
+              </div>
+           </div><!-- END card-->
+        </div>
+     </div>
+
+    </div>
+</section>
+
+
+
+
+
+{% endblock body %}
+    
