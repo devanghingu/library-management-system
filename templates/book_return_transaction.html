@@ -4,14 +4,14 @@
     <!-- Page content-->
     <div class="content-wrapper">
        <div class="content-heading">
-          <div>books</div>
+          <div>Past books Transaction </div>
        </div>
        {% include 'partial/messages.html' %}
        <div class="row">
         <div class="col-xl-12">
            <!-- START card-->
            <div class="card card-default">
-              <div class="card-header">list of books </div>
+              <div class="card-header">list of returned books </div>
               <div class="card-body">
                  <!-- START table-responsive-->
                  <div class="table-responsive">
@@ -21,35 +21,29 @@
                               <th>NO</th>
                               <th>book Name</th>
                               <th>Author</th>
-                              <th>Status</th>
                               <th>Issue Date</th>
-                             <th>Action</th>
+                              <th>Return Date</th>
+                              <th>Status</th>
                           </tr>
                        </thead>
                        <tbody>
-                           {% for data in mybook %}
+                          
+                           {% for data in tran %}
                            <tr>
                               <td>{{forloop.counter}}</td>
-                              <td>{{data.book}}</td>
+                              <td>{{data}}</td>
                               <td>{{data.book.author}}</td>
-                              <td>{%if data.issue_date %}
-                                    {% if data.return_date %}
-                                       <div class="float-right badge badge-Success">returned</div>
-                                    {% else %}   
-                                       <div class="float-right badge badge-info">Issue</div>
-                                    {% endif %}
-                                    {% else %}
-                                    <div class="float-right badge badge-warning">waiting for issue</div>
-                                    {% endif %}
-                                 </td>
                                <td>
-                                 <p>{%if data.issue_date %}{{data.issue_date }}{% else %}Not collected by you{% endif %}</p>
+                                 <p>{%if data.issue_date %}{{data.issue_date }}{% endif %}</p>
                                </td>
-                               
                                <td>
-                                 {% if data.return_date == none and data.issue_date == none %}<a class="btn btn-warning" href="{%url 'cancel' book_id=data.id %}">Cancel</a>{% endif %}
-                                 {% if data.return_date == none and data.issue_date  %}<a class="btn btn-success" href="{%url 'return' book_id=data.id %}">return</a>{% endif %}
-                                 </td>
+                                 <p>{%if data.return_date %}{{data.return_date }}{% endif %}</p>
+                               </td>
+                               <td class="text-center">
+                                 {% if data.return_date %}
+                                    <div class="float-center badge badge-Success">returned</div>
+                                 {% endif %}
+                              </td>
                             </tr>
                             {% endfor %}
                        </tbody>

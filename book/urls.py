@@ -5,5 +5,10 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('books',views.BooksCBView.as_view(),name='books'),
     path('books/issue/<int:book_id>',views.IssueBookCBView.as_view(),name='issuebook'),
-    path('mybooks',views.MybookCBV.as_view(),name='mybooks')
+    path('mybooks',views.MybookCBV.as_view(),name='mybooks'),
+    path('mybooks/cancel/<int:book_id>',views.MybookcancelCBV.as_view(),name='cancel'),
+    path('mybooks/return/<int:book_id>',views.MybookreturnCBV.as_view(),name='return'),
+    path('mybooks/returned',views.PastTransactionCBV.as_view(),name='returned')
+
+
 ]

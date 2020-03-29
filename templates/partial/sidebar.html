@@ -88,8 +88,8 @@
                      <span data-localize="sidebar.nav.chart.CHART">My books</span>
                   </a>
                </li>
-               <li {% if request.resolver_match.url_name == 'mybooks' %}class="active"{% endif %}>
-                  <a href="{% url 'mybooks' %}">
+               <li {% if request.resolver_match.url_name == 'returned' %}class="active"{% endif %}>
+                  <a href="{% url 'returned' %}">
                      <em class="fa fa-reply"></em>
                      <span data-localize="sidebar.nav.chart.CHART">Returned</span>
                   </a>
