@@ -25,12 +25,12 @@
                         <form action="" method="POST">
                            {% csrf_token %}
                            <input type="hidden" name="bookid" value="{{trans.id}}">
-                           <input type="submit" value="cancel" name="cancel" class="btn btn-primary">
+                           <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
+                           <a href="{% url 'mybooks'%}" class="btn btn-default">Cancel</a>
                         </form>
                      </div>
                   </div>
                </div>
-
             </div>
         </div>
       </div>

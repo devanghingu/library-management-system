@@ -22,33 +22,29 @@
                               <th>book Name</th>
                               <th>Author</th>
                               <th>Status</th>
-                              <th>Issue Date</th>
+                              <th>Date</th>
                              <th>Action</th>
                           </tr>
                        </thead>
                        <tbody>
-                           {% for data in mybook %}
+                           {% for data in books %}
                            <tr>
                               <td>{{forloop.counter}}</td>
                               <td>{{data.book}}</td>
                               <td>{{data.book.author}}</td>
                               <td>{%if data.issue_date %}
-                                    {% if data.return_date %}
-                                       <div class="float-right badge badge-Success">returned</div>
-                                    {% else %}   
-                                       <div class="float-right badge badge-info">Issue</div>
+                                    <div class="float-left badge badge-warning">Waiting</div>
                                     {% endif %}
-                                    {% else %}
-                                    <div class="float-right badge badge-warning">Issue</div>
-                                    {% endif %}
-                                 </td>
+                              </td>
                                <td>
                                  <p>{%if data.issue_date %}{{data.issue_date }}{% else %}Not collected by you{% endif %}</p>
                                </td>
-                               
                                <td>
-                                 {% if data.return_date == none and data.issue_date == none %}<a class="btn btn-warning" href="{%url 'cancel' book_id=data.id %}">Cancel</a>{% endif %}
-                                 {% if data.return_date == none and data.issue_date  %}<a class="btn btn-success" href="{%url 'return' book_id=data.id %}">return</a>{% endif %}
+                                  
+                                  {% if data.issue %}
+                                     
+                                  {% endif %}
+                                     <a href="{% url 'userqueue' book_id=data.id %}" class="btn btn-success">View Waitinglist </a>
                                  </td>
                             </tr>
                             {% endfor %}
