@@ -50,8 +50,8 @@ class IssueBookCBView(View):
                 return redirect('books')
             else:
                 book1=Books.objects.filter(id=kwargs['book_id']).get()
-                transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user).get()
-                if transexist:
+                transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user)
+                if transexist.exists():
                     messages.error(request,'opps you are already in waiting queue')
                     return redirect('mybooks')
                 WaitingTransaction.objects.create(book=book1,issue_by=request.user)
@@ -59,13 +59,15 @@ class IssueBookCBView(View):
                 return redirect('mybooks')
         except Exception as e:
             book1=Books.objects.filter(id=kwargs['book_id']).get()
-            transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user).get()
-            if transexist:
+            transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user)
+            if transexist.exists():
                 messages.error(request,'opps you are already in waiting queue')
                 return redirect('mybooks')
             WaitingTransaction.objects.create(book=book1,issue_by=request.user)
             messages.success(request,"Your request added in queue.")
             return redirect('mybooks')
+
+@method_decorator(login_required, name='dispatch')
 class MybookCBV(View):
     def get(self,request):
         allbook=Transaction.objects.filter(issue_by=request.user,return_date=None)
@@ -73,6 +75,7 @@ class MybookCBV(View):
     def post(self,request):
         pass
 
+@method_decorator(login_required, name='dispatch')
 class MybookcancelCBV(View):
     def get(self,request,*args, **kwargs):
         #check transection exist or not 
@@ -88,13 +91,18 @@ class MybookcancelCBV(View):
         if transation_exist.count():
             transation_exist=transation_exist.get()
             book1=Books.objects.filter(id=transation_exist.book.id).get()
-            book1.quantity+=1
+            waitinguser=WaitingTransaction.objects.filter(book=book1).order_by('issue_date').first()
+            if waitinguser:
+                trans=Transaction.objects.create(book=book1,issue_by=waitinguser.issue_by)
+            else:
+                book1.quantity+=1
             transation_exist.delete()
             book1.save()
             messages.success(request,'Transaction deleted ')
             return redirect('mybooks')
         else:
             return redirect('mybooks')
+@method_decorator(login_required, name='dispatch')
 class MybookreturnCBV(View):
     def get(self,request,*args, **kwargs):
         transation_exist=Transaction.objects.filter(issue_by=request.user,return_date=None,id=kwargs['book_id'])
@@ -110,7 +118,11 @@ class MybookreturnCBV(View):
             transation_exist.return_date=timezone.now()
 
             book1=Books.objects.filter(id=transation_exist.book.id).get()
-            book1.quantity+=1
+            waitinguser=WaitingTransaction.objects.filter(book=book1).order_by('issue_date').first()
+            if waitinguser:
+                trans=Transaction.objects.create(book=book1,issue_by=waitinguser.issue_by)
+            else:
+                book1.quantity+=1
             book1.save()
             transation_exist.delete()
 
@@ -118,12 +130,15 @@ class MybookreturnCBV(View):
         else:
             messages.error(request,"book's transaction does not exist.!!")
             return redirect('mybooks')
+@method_decorator(login_required, name='dispatch')
 class PastTransactionCBV(View):
     def get(self,request,*args, **kwargs):
         transation_exist= Transaction.objects.filter(issue_by=request.user, return_date__isnull=False)
         if transation_exist:
             return render(request,'book_return_transaction.html',{'tran':transation_exist})
-
+        return render(request,'book_return_transaction.html')
+        
+@method_decorator(login_required, name='dispatch')
 class MybookWaitingCBView(View):
     def get(self,request,*args, **kwargs):
         # get all books of user
@@ -135,7 +150,7 @@ class MybookWaitingCBView(View):
         return render(request,'book_user_waiting.html',{'books':books})
     def post(self,request,*args, **kwargs):
         pass
-
+@method_decorator(login_required, name='dispatch')
 class UserWaitingList(View):
     def get(self,request,*args, **kwargs):
         book1=WaitingTransaction.objects.filter(id=kwargs['book_id']).get()

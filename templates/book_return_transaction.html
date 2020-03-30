@@ -13,7 +13,9 @@
            <div class="card card-default">
               <div class="card-header">list of returned books </div>
               <div class="card-body">
-                 <!-- START table-responsive-->
+               
+               {% if tran %}                    
+               <!-- START table-responsive-->
                  <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                        <thead>
@@ -48,7 +50,13 @@
                             {% endfor %}
                        </tbody>
                     </table>
-                 </div><!-- END table-responsive-->
+                 </div>
+                 <!-- END table-responsive-->
+                 {% else %}
+                  <h3 class="text-center">
+                     you does't have past transaction
+                  </h3>
+                 {% endif %}
               </div>
            </div><!-- END card-->
         </div>
