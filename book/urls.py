@@ -11,5 +11,5 @@ urlpatterns = [
     path('mybooks/returned',views.PastTransactionCBV.as_view(),name='returned'),
     path('mybooks/queue',views.MybookWaitingCBView.as_view(),name='queue'),
     path('mybooks/queue/<int:book_id>',views.UserWaitingList.as_view(),name='userqueue'),
-
+    path('mybooks/queue/cancel/<int:book_id>',views.UserWaitingCancel.as_view(),name='queuecancel'),
 ]

@@ -94,6 +94,14 @@
                      <span data-localize="sidebar.nav.chart.CHART">Returned</span>
                   </a>
                </li>
+               <li {% if request.resolver_match.url_name == 'queue' %}class="active"{% endif %}>
+                  <a href="{% url 'queue' %}">
+                     <em class="fa fa-wait"></em>
+                     <span data-localize="sidebar.nav.chart.CHART">Waiting list</span>
+                  </a>
+               </li>
+
+               
                <li {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
                   <a href="{% url 'profile' %}">
                      <em class="fa fa-user"></em>

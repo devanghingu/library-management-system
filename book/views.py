@@ -121,6 +121,7 @@ class MybookreturnCBV(View):
             waitinguser=WaitingTransaction.objects.filter(book=book1).order_by('issue_date').first()
             if waitinguser:
                 trans=Transaction.objects.create(book=book1,issue_by=waitinguser.issue_by)
+                waitinguser.delete()
             else:
                 book1.quantity+=1
             book1.save()
@@ -153,6 +154,26 @@ class MybookWaitingCBView(View):
 @method_decorator(login_required, name='dispatch')
 class UserWaitingList(View):
     def get(self,request,*args, **kwargs):
-        book1=WaitingTransaction.objects.filter(id=kwargs['book_id']).get()
-        waitinguser=WaitingTransaction.objects.filter(book=book1.book).order_by('issue_date')
-        return render(request,'book_user_waiting_show.html',{'books':waitinguser})
+        book1=WaitingTransaction.objects.filter(id=kwargs['book_id'],issue_by=request.user)
+        if book1.exists():
+            waitinguser = WaitingTransaction.objects.filter(book=book1.get().book).order_by('issue_date')
+            return render(request,'book_user_waiting_show.html',{'books':waitinguser})
+        messages.error(request,"opps. data does'nt exist")
+        return redirect('mybooks')
+@method_decorator(login_required, name='dispatch')
+class UserWaitingCancel(View):
+    def get(self,request,*args, **kwargs):
+        userinwaiting=WaitingTransaction.objects.filter(id=kwargs['book_id'],issue_by=request.user)
+        if userinwaiting.exists():
+            return render(request,'book_waiting_cancel.html',{'trans':userinwaiting.get()})
+        messages.error(request,"book's transaction does not exist.!!")
+        return redirect('queue')
+    def post(self,request,*args, **kwargs):
+        userinwaiting=WaitingTransaction.objects.filter(id=kwargs['book_id'],issue_by=request.user)
+        if userinwaiting.exists():
+            userinwaiting.delete()
+            messages.success(request,'waiting book deleted')
+            return redirect('queue')
+        messages.error(request,"book's transaction does not exist.!!")
+        return redirect('queue')
+    

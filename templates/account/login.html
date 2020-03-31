@@ -8,7 +8,7 @@
    <meta name="description" content="Bootstrap Admin App">
    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-   <title>MOM | Login </title><!-- =============== VENDOR STYLES ===============-->
+   <title>library  | Login </title><!-- =============== VENDOR STYLES ===============-->
    <!-- FONT AWESOME-->
    <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/brands.css' %}">
    <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/regular.css' %}">
@@ -26,12 +26,13 @@
          <!-- START card-->
          <div class="card card-flat">
             <div class="card-header text-center bg-info"><a href="#"><img class="block-center rounded"
-                     src="{% static 'img/logo-mom.png' %}" alt="Image"></a></div>
+                     src="" alt="Image"></a></div>
             <div class="card-body">
-               {% include 'partial/messages.html' %}
                <p class="text-center py-2">SIGN IN TO CONTINUE.</p>
+               {% include 'partial/messages.html' %}
                <form class="mb-3" id="loginForm" method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}
+                  
                   {% for field in form %}
                   <div class="form-group">{{field.label}}
                      <div class="input-group with-focus">
