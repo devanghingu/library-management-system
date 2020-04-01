@@ -12,8 +12,8 @@ class AddBookCBV(View):
     def get(self, request, *args, **kwargs):
         form = forms.add_book()
         context = {}
-        context = {'form': form}
-        return render(request, 'librarian/add_book.html', context)
+        context = {"form": form}
+        return render(request, "librarian/add_book.html", context)
 
     def post(self, request, *args, **kwargs):
         form = forms.add_book(request.POST)
