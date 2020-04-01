@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<section class="section-container">
+    <!-- Page content-->
+   <div class="content-wrapper">
+      <div class="content-heading">
+         <div>Add New Book</div>
+      </div>
+      <div class="row">
+         <div class="col-xl-12">
+           <!-- START card-->
+            <div class="offset-xl-3 col-xl-5 ">
+               
+               <div class="card card-default" style="position: relative; opacity: 1; left: 0px; top: 0px;">
+                  <div class="card-header portlet-handler ui-sortable-handle"><b>Add books </b></div>
+                  <div class="card-wrapper">
+                     <form method="POST">
+                        {% csrf_token %}
+                        <div class="card-body">
+                           {% for field  in form %}
+                              <div class="form-group">{{field}}</div>
+                           {% endfor %}       
+                           </div>
+                        <div class="card-footer text-right">
+                           <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+</section>
+
+
+
+
+
+{% endblock body %}
+    

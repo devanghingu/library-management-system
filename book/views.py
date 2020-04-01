@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib.auth.models import User
 from .models import Books, Transaction, WaitingTransaction
 
 @login_required()
@@ -11,12 +12,12 @@ def index(request):
     return redirect('books')
 class BooksCBView(View):
     def get(self,request,*args, **kwargs):
-        context={}
+        user=User.objects.get(username=request.user)
+        if user.is_staff:
+            return redirect('addbook')
         context['books']=Books.objects.all()
         return render(request,'book_all.html',context)
-    def post(self,request,*args, **kwargs):
-        pass
-# def book_status(request):
+# def book_status(request)books:
 #     bookavailable=Books.objects.filter(id=kwargs['book_id'],quantity__gt=0)
 
 class IssueBookCBView(View):
