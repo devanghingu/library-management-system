@@ -44,7 +44,7 @@
                   {% endfor %}
                {% endif %}
                <form class="mb-3" id="loginForm" method="POST" action="{% url 'account_login' %}">
-                  {% csrf_token %}   
+                  {% csrf_token %}
                   {% for field in form %}
                   <div class="form-group">{{field.label}}
                      <div class="input-group with-focus">
