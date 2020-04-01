@@ -1,11 +1,15 @@
-from django.shortcuts import render, redirect
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from django.views.generic import View
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.utils import timezone
-from book.models import Books, Transaction, WaitingTransaction
+from django.utils.decorators import method_decorator
+from django.views.generic import View
+
 from . import forms
+from book.models import Books
+from book.models import Transaction
+from book.models import WaitingTransaction
 
 
 class AddBookCBV(View):

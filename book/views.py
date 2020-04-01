@@ -1,11 +1,15 @@
-from django.shortcuts import render, redirect
-from django.views.generic import View
-from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import Books, Transaction, WaitingTransaction
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.generic import View
+
+from .models import Books
+from .models import Transaction
+from .models import WaitingTransaction
 
 
 @login_required()
