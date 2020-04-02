@@ -35,7 +35,7 @@
                                <td>{{book.author}}</td>
                                <td>{{book.category.name}}</td>
                                <td>{{book.quantity}}</td>
-                               <td><a class="btn btn-primary" href="{% url 'issuebook' book_id=book.id %}">Issue</button></td>
+                               <td><a class="btn btn-primary" href="{% url 'issuebook' book_id=book.id %}">Issue</a></td>
                             </tr>
                             {% endfor %}
                        </tbody>

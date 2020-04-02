@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'librarian/base.html' %}
 
 
 {% block body %}
@@ -7,7 +7,7 @@
     <!-- Page content-->
    <div class="content-wrapper">
       <div class="content-heading">
-         <div>Add New Book</div>
+         <div>{% if request.resolver_match.url_name == 'addbook' %}Add New Book {% else %} Update book {%endif%}</div>
       </div>
       <div class="row">
          <div class="col-xl-12">
@@ -15,17 +15,23 @@
             <div class="offset-xl-3 col-xl-5 ">
                
                <div class="card card-default" style="position: relative; opacity: 1; left: 0px; top: 0px;">
-                  <div class="card-header portlet-handler ui-sortable-handle"><b>Add books </b></div>
+                  <div class="card-header portlet-handler ui-sortable-handle">
+                     <b>{% if request.resolver_match.url_name == 'addbook' %}Add books {% else %} Update book {%endif%}</b></div>
                   <div class="card-wrapper">
                      <form method="POST">
                         {% csrf_token %}
                         <div class="card-body">
                            {% for field  in form %}
                               <div class="form-group">{{field}}</div>
+                              {{field.errors}}
                            {% endfor %}       
                            </div>
                         <div class="card-footer text-right">
-                           <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
+                           {% if request.resolver_match.url_name == 'addbook' %}
+                           <input type="submit" value="Add" name="cancel" class="btn btn-primary">
+                           {% else %}
+                           <input type="submit" value="update" name="cancel" class="btn btn-primary">
+                           {%endif%}
                         </div>
                      </form>
                   </div>

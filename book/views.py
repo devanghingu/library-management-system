@@ -15,6 +15,7 @@ class BooksCBView(View):
         user=User.objects.get(username=request.user)
         if user.is_staff:
             return redirect('addbook')
+        context={}
         context['books']=Books.objects.all()
         return render(request,'book_all.html',context)
 # def book_status(request)books:
@@ -25,22 +26,21 @@ class IssueBookCBView(View):
         # check user book does not morethen five
         bookavailable=Books.objects.filter(id=kwargs['book_id'],quantity__gt=0)
         try:
-            if bookavailable.count():
+            if bookavailable.exists():
                 return render(request,'book_issue.html',{'book':bookavailable.get()})
             else:
                 return render(request,'book_issue.html',{'book':bookavailable.get(),'message':'Book not Available at moment! Can you wait for book?'})
         except Exception as e:
             return render(request,'book_issue.html',{'message':'Book not Available at moment.! can you wait for book?'})
         
-         
     def post(self,request,*args, **kwargs):
         bookavailable=Books.objects.filter(id=kwargs['book_id'],quantity__gt=0)
         book=request.POST.get("bookid", "")
         try:
-            if bookavailable.count():
+            if bookavailable.exists():
                  
                 bookexist=Transaction.objects.filter(issue_by=request.user,return_date=None,book=bookavailable.get())
-                if bookexist:
+                if bookexist.exist():
                     messages.warning(request,"book already issue by you. one book cannot issue multiple at a times ")
                     return redirect('books')
                 bookavailable=bookavailable.get()
@@ -73,8 +73,6 @@ class MybookCBV(View):
     def get(self,request):
         allbook=Transaction.objects.filter(issue_by=request.user,return_date=None)
         return render(request,'book_user_all.html',{'mybook':allbook})
-    def post(self,request):
-        pass
 
 @method_decorator(login_required, name='dispatch')
 class MybookcancelCBV(View):
