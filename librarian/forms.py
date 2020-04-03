@@ -1,5 +1,8 @@
 from django import forms
-from book.models import Books, Category, Transaction
+
+from book.models import Books
+from book.models import Category
+from book.models import Transaction
 
 
 class add_book(forms.ModelForm):
