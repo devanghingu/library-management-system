@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'librarian/base.html' %}
 {% block body %}
 <section class="section-container">
     <!-- Page content-->
@@ -35,11 +35,16 @@
                                <td>{{book.author}}</td>
                                <td>{{book.category.name}}</td>
                                <td>{{book.quantity}}</td>
-                               <td><a class="btn btn-primary" href="{% url 'issuebook' book_id=book.id %}">Issue</a></td>
+                               <td>
+                                  <a class="btn btn-warning" href="{% url 'updatebook' book_id=book.id %}" >update</a>
+                                 <a class="btn btn-danger" href="{% url 'deletebook' book_id=book.id %}" onclick="return myFunction()">Delete</a>
+                              </td>
+
                             </tr>
                             {% endfor %}
                        </tbody>
                     </table>
+                    
                  </div><!-- END table-responsive-->
               </div>
               <div class="card-footer">

@@ -66,7 +66,6 @@
                         </div><!-- Name and Job-->
                         <div class="user-block-info"><span class="user-block-name">Hello, </span>
                            <span class="user-block-role">
-                             
                            </span>
                         </div>
                      </div>
@@ -74,33 +73,38 @@
                </a>
                </li><!-- END user info-->
                <!-- Iterates over all sidebar items-->
-               <li class="nav-heading "><span data-localize="sidebar.heading.HEADER">Main Navigation</span></li>
+               <li class="nav-heading "><span data-localize="sidebar.heading.HEADER">Main Navigation / Librarian</span></li>
               
-               <li {% if request.resolver_match.url_name == 'books' %}class="active"{% endif %}>
-                  <a href="{% url 'books' %}">
+               <li {% if request.resolver_match.url_name == 'allbook' %}class="active"{% endif %}>
+                  <a href="{% url 'allbook' %}">
                      <em class="fa fa-book"></em>
-                     <span data-localize="sidebar.nav.chart.CHART">Books</span>
+                     <span data-localize="sidebar.nav.chart.CHART">All Books</span>
                   </a>
                </li>
-               <li {% if request.resolver_match.url_name == 'mybooks' %}class="active"{% endif %}>
-                  <a href="{% url 'mybooks' %}">
+               <li {% if request.resolver_match.url_name == 'addbook' %}class="active"{% endif %}>
+                  <a href="{% url 'addbook' %}">
                      <em class="fa fa-server"></em>
-                     <span data-localize="sidebar.nav.chart.CHART">My books</span>
+                     <span data-localize="sidebar.nav.chart.CHART">Add New Book</span>
                   </a>
                </li>
-               <li {% if request.resolver_match.url_name == 'returned' %}class="active"{% endif %}>
-                  <a href="{% url 'returned' %}">
+               <li {% if request.resolver_match.url_name == 'addcetagory' %}class="active"{% endif %}>
+                  <a href="{% url 'addcategory' %}">
                      <em class="fa fa-reply"></em>
-                     <span data-localize="sidebar.nav.chart.CHART">Returned</span>
+                     <span data-localize="sidebar.nav.chart.CHART">Add Category</span>
                   </a>
                </li>
-               <li {% if request.resolver_match.url_name == 'queue' %}class="active"{% endif %}>
-                  <a href="{% url 'queue' %}">
+               <li {% if request.resolver_match.url_name == 'allrequest' %}class="active"{% endif %}>
+                  <a href="{% url 'allrequest' %}">
                      <em class="fa fa-wait"></em>
-                     <span data-localize="sidebar.nav.chart.CHART">Waiting list</span>
+                     <span data-localize="sidebar.nav.chart.CHART">New Request</span>
                   </a>
                </li>
-
+               <li {% if request.resolver_match.url_name == 'requestreturn' %}class="active"{% endif %}>
+                  <a href="{% url 'requestreturn' %}">
+                     <em class="fa fa-wait"></em>
+                     <span data-localize="sidebar.nav.chart.CHART">return a Book </span>
+                  </a>
+               </li>
                
                <li {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
                   <a href="{% url 'profile' %}">

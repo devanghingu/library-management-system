@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'librarian/base.html' %}
 
 
 {% block body %}
@@ -7,7 +7,7 @@
     <!-- Page content-->
    <div class="content-wrapper">
       <div class="content-heading">
-         <div>Book cancellation</div>
+         <div>Book Waiting cancellation</div>
       </div>
       <div class="row">
          <div class="col-xl-12">
@@ -26,7 +26,7 @@
                            {% csrf_token %}
                            <input type="hidden" name="bookid" value="{{trans.id}}">
                            <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
-                           <a href="{% url 'mybooks'%}" class="btn btn-default">Cancel</a>
+                           <a href="{% url 'queue'%}" class="btn btn-default">Cancel</a>
                         </form>
                      </div>
                   </div>

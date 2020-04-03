@@ -20,12 +20,14 @@
                      <div class="card-body">
                         <p><u>Book Name</u> : {{book.title}}</p>
                         <p><u>Author   </u> : {{book.author}}</p>
+                        <b>{{message}}</b>
                      </div>
                      <div class="card-footer text-right">
                         <form action="" method="POST">
                            {% csrf_token %}
                            <input type="hidden" name="bookid" value="{{book.id}}">
                            <input type="submit" value="issue" name="issue" class="btn btn-primary">
+                           <a href="{% url 'books'%}" class="btn btn-secondry">cancel</a>
                         </form>
                      </div>
                   </div>

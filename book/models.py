@@ -35,6 +35,9 @@ class Transaction(models.Model):
         return self.book.title
 class WaitingTransaction(models.Model):
     """ waiting model when book is outof quantitiy """
-    book=models.ForeignKey(Books, on_delete=models.CASCADE)
+    book=models.ForeignKey(Books,on_delete=models.CASCADE)
     issue_by=models.ForeignKey(User,on_delete=models.CASCADE)
     issue_date=models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.book.title)+ str(self.issue_by)

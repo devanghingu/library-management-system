@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'librarian/base.html' %}
 
 
 {% block body %}
@@ -7,30 +7,32 @@
     <!-- Page content-->
    <div class="content-wrapper">
       <div class="content-heading">
-         <div>Book cancellation</div>
+         <div>issue books</div>
       </div>
       <div class="row">
          <div class="col-xl-12">
            <!-- START card-->
-            <div class="offset-xl-3 col-xl-5 ">
+         <div class="offset-xl-3 col-xl-5 ">
                
                <div class="card card-default" style="position: relative; opacity: 1; left: 0px; top: 0px;">
-                  <div class="card-header portlet-handler ui-sortable-handle"><b>cancellation </b></div>
+                  <div class="card-header portlet-handler ui-sortable-handle"><b>Confirmation</b></div>
                   <div class="card-wrapper">
                      <div class="card-body">
-                        <p><u>Book Name</u> : {{trans.book.title}}</p>
-                        <p><u>Author   </u> : {{trans.book.author}}</p>
+                        <p><u>Book Name</u> : {{book.title}}</p>
+                        <p><u>Author   </u> : {{book.author}}</p>
+                        <b>{{message}}</b>
                      </div>
                      <div class="card-footer text-right">
                         <form action="" method="POST">
                            {% csrf_token %}
-                           <input type="hidden" name="bookid" value="{{trans.id}}">
-                           <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
-                           <a href="{% url 'mybooks'%}" class="btn btn-default">Cancel</a>
+                           <input type="hidden" name="bookid" value="{{book.id}}">
+                           <input type="submit" value="issue" name="issue" class="btn btn-primary">
+                           <a href="{% url 'books'%}" class="btn btn-secondry">cancel</a>
                         </form>
                      </div>
                   </div>
                </div>
+
             </div>
         </div>
       </div>

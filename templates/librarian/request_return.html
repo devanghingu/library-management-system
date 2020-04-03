@@ -1,21 +1,17 @@
-{% extends 'base.html' %}
-
-
+{% extends 'librarian/base.html' %}
 {% block body %}
-
 <section class="section-container">
     <!-- Page content-->
    <div class="content-wrapper">
       <div class="content-heading">
-         <div>Book cancellation</div>
+         <div>Book return</div>
       </div>
       <div class="row">
          <div class="col-xl-12">
            <!-- START card-->
             <div class="offset-xl-3 col-xl-5 ">
-               
                <div class="card card-default" style="position: relative; opacity: 1; left: 0px; top: 0px;">
-                  <div class="card-header portlet-handler ui-sortable-handle"><b>cancellation </b></div>
+                  <div class="card-header portlet-handler ui-sortable-handle"><b>return confirmation </b></div>
                   <div class="card-wrapper">
                      <div class="card-body">
                         <p><u>Book Name</u> : {{trans.book.title}}</p>
@@ -25,7 +21,7 @@
                         <form action="" method="POST">
                            {% csrf_token %}
                            <input type="hidden" name="bookid" value="{{trans.id}}">
-                           <input type="submit" value="Proceed" name="cancel" class="btn btn-primary">
+                           <input type="submit" value="Proceed Return" name="return" class="btn btn-primary">
                            <a href="{% url 'mybooks'%}" class="btn btn-default">Cancel</a>
                         </form>
                      </div>
@@ -34,13 +30,6 @@
             </div>
         </div>
       </div>
-
     </div>
 </section>
-
-
-
-
-
 {% endblock body %}
-    
