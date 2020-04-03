@@ -11,10 +11,10 @@ urlpatterns = [
     path('addcetagory',views.AddCategoryCBV.as_view(),name='addcategory'),
     path('category/delete/<int:cat_id>',views.CategoryDelete.as_view(),name='deletecategory'),
     path('allrequest',views.AllRequest.as_view(),name='allrequest'),
+    
     path('allrequest/issue/<int:book_id>',views.Requestissue.as_view(),name='requestissue'),
     path('allrequest/return/',views.Requestreturn.as_view(),name='requestreturn'),
     path('allrequest/return/<int:book_id>',views.Requestreturn.as_view(),name='requestreturn'),
     path('allrequest/reject/<int:book_id>',views.Requestreject.as_view(),name='requestreject'),
     path('waitinglist',views.WaitingList.as_view(),name='waitinglist'),
-
 ]

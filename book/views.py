@@ -36,29 +36,19 @@ class IssueBookCBView(View):
     def post(self,request,*args, **kwargs):
         bookavailable=Books.objects.filter(id=kwargs['book_id'],quantity__gt=0)
         book=request.POST.get("bookid", "")
-        try:
-            if bookavailable.exists():
-                 
-                bookexist=Transaction.objects.filter(issue_by=request.user,return_date=None,book=bookavailable.get())
-                if bookexist.exist():
-                    messages.warning(request,"book already issue by you. one book cannot issue multiple at a times ")
-                    return redirect('books')
-                bookavailable=bookavailable.get()
-                Transaction.objects.create(book=bookavailable,issue_by=request.user)
-                bookavailable.quantity-=1
-                bookavailable.save()
-                messages.success(request,"book has been issue done")
+        # try:
+        if bookavailable.exists():
+            bookexist=Transaction.objects.filter(issue_by=request.user,return_date=None,book=bookavailable.get())
+            if bookexist.exists():
+                messages.warning(request,"book already issue by you. one book cannot issue multiple at a times ")
                 return redirect('books')
-            else:
-                book1=Books.objects.filter(id=kwargs['book_id']).get()
-                transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user)
-                if transexist.exists():
-                    messages.error(request,'opps you are already in waiting queue')
-                    return redirect('mybooks')
-                WaitingTransaction.objects.create(book=book1,issue_by=request.user)
-                messages.success(request,"Your request added in queue.")
-                return redirect('mybooks')
-        except Exception as e:
+            bookavailable=bookavailable.get()
+            Transaction.objects.create(book=bookavailable,issue_by=request.user)
+            bookavailable.quantity-=1
+            bookavailable.save()
+            messages.success(request,"book has been issue done")
+            return redirect('books')
+        else:
             book1=Books.objects.filter(id=kwargs['book_id']).get()
             transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user)
             if transexist.exists():
@@ -67,6 +57,15 @@ class IssueBookCBView(View):
             WaitingTransaction.objects.create(book=book1,issue_by=request.user)
             messages.success(request,"Your request added in queue.")
             return redirect('mybooks')
+        # except Exception as e:
+        #     book1=Books.objects.filter(id=kwargs['book_id']).get()
+        #     transexist=WaitingTransaction.objects.filter(book=book1,issue_by=request.user)
+        #     if transexist.exists():
+        #         messages.error(request,'opps you are already in waiting queue')
+        #         return redirect('mybooks')
+        #     WaitingTransaction.objects.create(book=book1,issue_by=request.user)
+        #     messages.success(request,"Your request added in queue.")
+        #     return redirect('mybooks')
 
 @method_decorator(login_required, name='dispatch')
 class MybookCBV(View):

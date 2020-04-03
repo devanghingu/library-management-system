@@ -7,6 +7,7 @@ from django.utils import timezone
 from book.models import Books, Transaction, WaitingTransaction,Category
 from . import forms
 from django.core import paginator 
+from django.utils import timezone
 
 class AddBookCBV(View):
     def get(self,request,*args, **kwargs):
@@ -96,20 +97,54 @@ class AllRequest(View):
 
 class Requestissue(View):
     def get(self,request,*args, **kwargs):
-        pass
+        trans=Transaction.objects.filter(id=kwargs['book_id'])
+        if trans.exists():
+            trans=trans.get()
+            trans.issue_date=timezone.now()
+            messages.success(request,'book Successfully issue to {0}..!'.format(trans.issue_by))
+            trans.save()
+        else:
+            messages.error('issue book does not exist..!!')
+        return redirect('allrequest')
+
+
+
     def post(self,request,*args, **kwargs):
         pass
 class Requestreturn(View):
     def get(self,request,*args, **kwargs):
-        transaction=Transaction.objects.filter(return_date=None,issue_date__isnull=False)
-        return render(request,'librarian/request_return_all.html',{'transaction':transaction})
-    def post(self,request,*args, **kwargs):
-        pass
+        if 'book_id' in kwargs:
+            trans=Transaction.objects.filter(id=kwargs['book_id'])
+            if trans.exists():
+                trans=trans.get()
+                trans.return_date=timezone.now()
+                book=Books.objects.filter(id=trans.book.id).get()
+                book.quantity+=1
+                book.save()
+                trans.save()
+                messages.success(request,'book Successfully return of {0}..!'.format(trans.issue_by))
+            else:
+                messages.success(request,'Transaction of book does not exist..!')
+            return redirect('allrequest')
+
+        else:
+            transaction=Transaction.objects.filter(return_date=None,issue_date__isnull=False)
+            return render(request,'librarian/request_return_all.html',{'transaction':transaction})
+
+
 class Requestreject(View):
     def get(self,request,*args, **kwargs):
-        pass
-    def post(self,request,*args, **kwargs):
-        pass
+        trans=Transaction.objects.filter(id=kwargs['book_id'])
+        if trans.exists():
+            trans=trans.get()
+            book=Books.objects.filter(id=trans.book.id).get()
+            trans.delete()
+            book.quantity+=1
+            book.save()
+            messages.success(request,'Request of {0} succesfully removed..!!'.format(trans.issue_by))    
+        else:
+            messages.error('Request does not exist..!!')
+        return redirect('allrequest')
 class WaitingList(View):
     def get(self,request,*args, **kwargs):
         pass
