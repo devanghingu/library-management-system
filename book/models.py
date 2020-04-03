@@ -38,7 +38,9 @@ class Transaction(models.Model):
     issue_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # when librarian accept book request
     issue_date = models.DateField(null=True, blank=True)
-    return_date = models.DateField(null=True, blank=True)  # when user return book
+    return_date = models.DateField(null=True,
+                                   blank=True)  # when user return book
+
     # status =models.PositiveIntegerField(default=0,choices=STATUS)
 
     def __str__(self):

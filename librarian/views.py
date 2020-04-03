@@ -47,9 +47,10 @@ class AddCategoryCBV(View):
     def get(self, request, *args, **kwargs):
         form = forms.add_category()
         cat = Category.objects.all()
-        return render(
-            request, "librarian/add_category.html", {"form": form, "category": cat}
-        )
+        return render(request, "librarian/add_category.html", {
+            "form": form,
+            "category": cat
+        })
 
     def post(self, request, *args, **kwargs):
         form = forms.add_category(request.POST)
@@ -59,9 +60,10 @@ class AddCategoryCBV(View):
             return redirect(self.request.path_info)
         else:
             cat = Category.objects.all()
-            return render(
-                request, "librarian/add_category.html", {"form": form, "category": cat}
-            )
+            return render(request, "librarian/add_category.html", {
+                "form": form,
+                "category": cat
+            })
 
 
 class CategoryDelete(View):
@@ -112,9 +114,8 @@ class UpdateBook(View):
 class AllRequest(View):
     def get(self, request, *args, **kwargs):
         transaction = Transaction.objects.filter(issue_date=None)
-        return render(
-            request, "librarian/request_all.html", {"transaction": transaction}
-        )
+        return render(request, "librarian/request_all.html",
+                      {"transaction": transaction})
 
     def post(self, request, *args, **kwargs):
         pass
@@ -127,8 +128,8 @@ class Requestissue(View):
             trans = trans.get()
             trans.issue_date = timezone.now()
             messages.success(
-                request, "book Successfully issue to {0}..!".format(trans.issue_by)
-            )
+                request,
+                "book Successfully issue to {0}..!".format(trans.issue_by))
             trans.save()
         else:
             messages.error("issue book does not exist..!!")
@@ -150,16 +151,16 @@ class Requestreturn(View):
                 book.save()
                 trans.save()
                 messages.success(
-                    request, "book Successfully return of {0}..!".format(trans.issue_by)
-                )
+                    request, "book Successfully return of {0}..!".format(
+                        trans.issue_by))
             else:
-                messages.success(request, "Transaction of book does not exist..!")
+                messages.success(request,
+                                 "Transaction of book does not exist..!")
             return redirect("allrequest")
 
         else:
-            transaction = Transaction.objects.filter(
-                return_date=None, issue_date__isnull=False
-            )
+            transaction = Transaction.objects.filter(return_date=None,
+                                                     issue_date__isnull=False)
             return render(
                 request,
                 "librarian/request_return_all.html",
@@ -177,8 +178,8 @@ class Requestreject(View):
             book.quantity += 1
             book.save()
             messages.success(
-                request, "Request of {0} succesfully removed..!!".format(trans.issue_by)
-            )
+                request, "Request of {0} succesfully removed..!!".format(
+                    trans.issue_by))
         else:
             messages.error("Request does not exist..!!")
         return redirect("allrequest")
