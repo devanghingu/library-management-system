@@ -13,7 +13,7 @@
          <div class="col-xl-12">
            <!-- START card-->
             <div class="offset-xl-3 col-xl-5 ">
-               
+
                <div class="card card-default" style="position: relative; opacity: 1; left: 0px; top: 0px;">
                   <div class="card-header portlet-handler ui-sortable-handle">
                      <b>{% if request.resolver_match.url_name == 'addbook' %}Add books {% else %} Update book {%endif%}</b></div>
@@ -24,7 +24,7 @@
                            {% for field  in form %}
                               <div class="form-group">{{field}}</div>
                               {{field.errors}}
-                           {% endfor %}       
+                           {% endfor %}
                            </div>
                         <div class="card-footer text-right">
                            {% if request.resolver_match.url_name == 'addbook' %}
@@ -48,4 +48,3 @@
 
 
 {% endblock body %}
-    

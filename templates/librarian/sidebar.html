@@ -74,7 +74,7 @@
                </li><!-- END user info-->
                <!-- Iterates over all sidebar items-->
                <li class="nav-heading "><span data-localize="sidebar.heading.HEADER">Main Navigation / Librarian</span></li>
-              
+
                <li {% if request.resolver_match.url_name == 'allbook' %}class="active"{% endif %}>
                   <a href="{% url 'allbook' %}">
                      <em class="fa fa-book"></em>
@@ -105,7 +105,7 @@
                      <span data-localize="sidebar.nav.chart.CHART">return a Book </span>
                   </a>
                </li>
-               
+
                <li {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
                   <a href="{% url 'profile' %}">
                      <em class="fa fa-user"></em>

@@ -12,7 +12,7 @@
            <!-- START card-->
            <div class="card card-default">
               <div class="card-header">List of New Request</div>
-              <div class="card-body">                 
+              <div class="card-body">
                  {% if transaction %}
                  <!-- START table-responsive-->
                  <div class="table-responsive">
@@ -22,7 +22,7 @@
                               <th>NO</th>
                               <th>book Name</th>
                               <th>requested user</th>
-                              <th>status</th>                           
+                              <th>status</th>
                              <th>Action</th>
                           </tr>
                        </thead>
@@ -35,7 +35,7 @@
                               <td>
                                  <div class="float-right badge badge-warning">received </div>
                               </td>
-                               
+
                                <td>
                                   <a class="btn btn-success" href="{%url 'requestissue' book_id=data.id %}">Accept</a>
                                  <a class="btn btn-warning" href="{%url 'requestreject' book_id=data.id %}">Reject</a>
@@ -61,4 +61,3 @@
 
 
 {% endblock body %}
-    
